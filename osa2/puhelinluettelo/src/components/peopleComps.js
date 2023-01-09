@@ -3,7 +3,7 @@ const Person = ( {person, deletePerson} ) => {
     return (
       <>
         <p>{person.name} {person.number}</p>
-        <button class="btn btn-primary" onClick={() => deletePerson(person.id)}>delete</button>
+        <button className="btn btn-primary" onClick={() => deletePerson(person.id)}>delete</button>
       </>
     )
   }
@@ -20,7 +20,7 @@ const Person = ( {person, deletePerson} ) => {
   
   const PersonForm = ( {newName, newNumber, addPerson, handleNameChange, handleNumberChange} ) => {
     return (
-      <div class="form-group" >
+      <div className="form-group" >
       <form onSubmit={addPerson}>
         <div>
           name: <input value={newName} onChange={handleNameChange} />
@@ -29,7 +29,7 @@ const Person = ( {person, deletePerson} ) => {
           number: <input value={newNumber} onChange={handleNumberChange} />
         </div>
         <div>
-          <button class="btn btn-primary" type="submit">add</button>
+          <button className="btn btn-primary" type="submit">add</button>
         </div>
       </form>
       </div>

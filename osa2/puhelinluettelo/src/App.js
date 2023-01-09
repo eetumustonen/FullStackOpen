@@ -49,11 +49,11 @@ const App = () => {
             setNewNumber('')
           })
           .catch(error => {
-            setErrorMessage(`${person.name} has already been deleted`)
+            console.log("Error message: ", error.response.data.error)
+            setErrorMessage(error.response.data.error)
             setTimeout(() => {
               setErrorMessage(null)
             }, 3000)
-            setPersons(persons.filter(p => p.id !== person.id))
           })
       }
     } else {
@@ -71,6 +71,13 @@ const App = () => {
           setPersons(persons.concat(returnedPerson))
           setNewName('')
           setNewNumber('')
+        })
+        .catch(error => {
+          console.log("Error message: ", error.response.data.error)
+          setErrorMessage(error.response.data.error)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 3000)
         })
     }
   }
@@ -93,6 +100,7 @@ const App = () => {
         setPersons(persons.filter(person => person.id !== id))
       })
       .catch(error => {
+        console.log(error)
         setErrorMessage(`${person.name} has already been deleted`)
         setTimeout(() => {
           setErrorMessage(null)
@@ -122,7 +130,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Phonebook</h1>
+      <h1>My Phonebook</h1>
       <Notification message={message} />
       <ErrorNotification message={errorMessage} />
       <Filter 
