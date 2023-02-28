@@ -7,17 +7,18 @@ router.get('/', async (request, response) => {
   const blogs = await Blog
     .find({})
     .populate('user', { username: 1, name: 1 })
-
+  console.log('GET request')
   response.json(blogs)
 })
 
 router.post('/', userExtractor, async (request, response) => {
+  console.log('POST request')
   const { title, author, url, likes } = request.body
   const blog = new Blog({
     title, author, url, 
     likes: likes ? likes : 0
   })
-
+  
   const user = request.user
 
   if (!user) {
@@ -36,7 +37,6 @@ router.post('/', userExtractor, async (request, response) => {
 
 router.put('/:id', async (request, response) => {
   const { title, url, author, likes } = request.body
-
   const updatedBlog = await Blog.findByIdAndUpdate(request.params.id,  { title, url, author, likes }, { new: true })
 
   response.json(updatedBlog)
@@ -44,7 +44,6 @@ router.put('/:id', async (request, response) => {
 
 router.delete('/:id', userExtractor, async (request, response) => {
   const blog = await Blog.findById(request.params.id)
-
   const user = request.user
 
   if (!user || blog.user.toString() !== user.id.toString()) {
@@ -55,7 +54,7 @@ router.delete('/:id', userExtractor, async (request, response) => {
 
   await user.save()
   await blog.remove()
-  
+  console.log('DELETE request')
   response.status(204).end()
 })
 
