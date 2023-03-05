@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import PropTypes from 'prop-types'
 
-const BlogForm = ({ createBlog }) => {
+const BlogForm = ({ createBlog, user }) => {
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newUrl, setNewUrl] = useState('')
-
+  console.log(`${user.username} blogform username`)
   const addBlog = (event) => {
     event.preventDefault()
     createBlog({
       title: newTitle,
       author: newAuthor,
-      url: newUrl
+      url: newUrl,
+      user: user
     })
     setNewTitle('')
     setNewAuthor('')
@@ -46,7 +47,7 @@ const BlogForm = ({ createBlog }) => {
             onChange={event => setNewUrl(event.target.value)}
           />
         </div>
-        <button type="submit">add</button>
+        <button id='new-blog-button'type="submit">add</button>
       </form>
     </div>
   )
